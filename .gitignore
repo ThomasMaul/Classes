@@ -1,0 +1,7 @@
+*.4dd
+*.4DIndx
+*.Match
+Logs
+Project/DerivedData
+*symbols.txt
+userPreferences.*
