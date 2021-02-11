@@ -12,16 +12,23 @@ Class constructor($init : Variant)
 		End case 
 	End if 
 	
-Function get($columndel : Text; $linedel : Text)->$col : Collection
+Function get($columndelpara : Text; $linedelpara : Text)->$col : Collection
 	$col:=Null:C1517
-	If (Count parameters:C259<1)
-		$columndel:=";"
-		$linedel:=Char:C90(13)
-	Else 
-		If (Count parameters:C259<2)
+	var $columndel; $linedel : Text
+	var $lines; $header; $line : Collection
+	var $i; $j : Integer
+	var $cells : Object
+	Case of 
+		: (Count parameters:C259<1)
+			$columndel:=";"
 			$linedel:=Char:C90(13)
-		End if 
-	End if 
+		: (Count parameters:C259<2)
+			$linedel:=Char:C90(13)
+			$columndel:=$columndelpara
+		Else 
+			$columndel:=$columndelpara
+			$linedel:=$linedelpara
+	End case 
 	If (This:C1470.content#Null:C1517)
 		$lines:=Split string:C1554(This:C1470.content; $linedel)
 		If ($lines.length>1)
@@ -40,16 +47,23 @@ Function get($columndel : Text; $linedel : Text)->$col : Collection
 		End if 
 	End if 
 	
-Function set($content : Collection; $columndel : Text; $linedel : Text)->$result : Text
+Function set($content : Collection; $columndelpara : Text; $linedelpara : Text)->$result : Text
 	$result:=""
-	If (Count parameters:C259<2)
-		$columndel:=";"
-		$linedel:=Char:C90(13)
-	Else 
-		If (Count parameters:C259<3)
+	var $columndel; $linedel; $newline : Text
+	var $keys; $values : Collection
+	var $i : Integer
+	
+	Case of 
+		: (Count parameters:C259<1)
+			$columndel:=";"
 			$linedel:=Char:C90(13)
-		End if 
-	End if 
+		: (Count parameters:C259<2)
+			$linedel:=Char:C90(13)
+			$columndel:=$columndelpara
+		Else 
+			$columndel:=$columndelpara
+			$linedel:=$linedelpara
+	End case 
 	
 	If ($content.length>1)
 		$keys:=OB Keys:C1719($content[0])

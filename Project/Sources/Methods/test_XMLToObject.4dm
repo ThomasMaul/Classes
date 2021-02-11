@@ -1,6 +1,10 @@
 //%attributes = {}
 // unit test
 
+var $i : Integer
+var $cvs_text : Text
+var $csv : cs:C1710.XMLToObject
+var $obj : Object
 
 For ($i; 1; 1)
 	Case of 

@@ -12,5 +12,5 @@ Initialize a new instance.
 Pass the text (content) of the XML or a file object.  
 Optionally: pass a collection with property names always to be set as collection, not as object properties
 
-## get -> collection
+## get() -> collection
 returns an object representing the XML

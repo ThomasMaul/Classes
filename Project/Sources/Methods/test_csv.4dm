@@ -1,22 +1,25 @@
 //%attributes = {}
 // unit test
-
+var $i : Integer
+var $csv_text; $result : Text
+var $col : Collection
+var $csv : cs:C1710.csv
 
 For ($i; 1; 3)
 	Case of 
 		: ($i=1)
-			$cvs_text:="A1;A2;A3"+Char:C90(13)+Char:C90(10)+"1;2;3"+Char:C90(13)+Char:C90(10)+"4;5;6"
-			$csv:=cs:C1710.csv.new($cvs_text)
+			$csv_text:="A1;A2;A3"+Char:C90(13)+Char:C90(10)+"1;2;3"+Char:C90(13)+Char:C90(10)+"4;5;6"
+			$csv:=cs:C1710.csv.new($csv_text)
 			$col:=$csv.get()
 			
 		: ($i=2)
-			$cvs_text:="A1\tA2\tA3"+Char:C90(13)+Char:C90(10)+"1\t2\t3"+Char:C90(13)+Char:C90(10)+"4\t5\t6"
-			$csv:=cs:C1710.csv.new($cvs_text)
+			$csv_text:="A1\tA2\tA3"+Char:C90(13)+Char:C90(10)+"1\t2\t3"+Char:C90(13)+Char:C90(10)+"4\t5\t6"
+			$csv:=cs:C1710.csv.new($csv_text)
 			$col:=$csv.get(Char:C90(9))
 			
 		: ($i=3)
-			$cvs_text:="A1\tA2\tA3"+Char:C90(13)+"1\t2\t3"+Char:C90(13)+Char:C90(10)+"4\t5\t6"
-			$csv:=cs:C1710.csv.new($cvs_text)
+			$csv_text:="A1\tA2\tA3"+Char:C90(13)+"1\t2\t3"+Char:C90(13)+Char:C90(10)+"4\t5\t6"
+			$csv:=cs:C1710.csv.new($csv_text)
 			$col:=$csv.get(Char:C90(9); Char:C90(13))
 	End case 
 	

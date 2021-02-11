@@ -18,6 +18,10 @@ Function get($always_col : Collection)->$obj : Object
 	If (Count parameters:C259>0)
 		This:C1470.always_col:=$always_col
 	End if 
+	
+	var $content; $ref; $subref; $next_XML_Ref; $ElemValue : Text
+	var $obj : Object
+	
 	$content:=This:C1470.content
 	$ref:=DOM Parse XML variable:C720($content)
 	C_TEXT:C284($name)
@@ -45,6 +49,9 @@ Function get($always_col : Collection)->$obj : Object
 	
 Function _child($obj : Object; $name : Text; $ref : Text; $value : Text)
 	C_OBJECT:C1216($oldobject; $obj; $dummy)
+	var $numAttributes; $i; $oldok; $type : Integer
+	var $ElemValue; $subref; $testvalue; $child; $next_XML_Ref : Text
+	
 	$dummy:=New object:C1471
 	$numAttributes:=DOM Count XML attributes:C727($ref)
 	C_TEXT:C284($Attrib; $ValAttrib)

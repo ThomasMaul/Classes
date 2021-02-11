@@ -2,7 +2,33 @@
 <!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
 <base name="Classes_TM" uuid="C7CB66A7146B4FE58D2EC910D84C2B16" collation_locale="de">
 	<schema name="DEFAULT_SCHEMA"/>
-	<base_extra>
+	<table name="Table_1" uuid="D14BD883DCEC4138A0C448E00F8E4EBB" id="1" prevent_journaling="true">
+		<field name="ID" uuid="CA05E08CB06448DF918BBED84205C7F0" type="10" unique="true" autogenerate="true" store_as_UUID="true" not_null="true" id="1"/>
+		<field name="testing_only" uuid="476E826FD8B04484924AF19407DAF15B" type="10" limiting_length="255" never_null="true" id="2"/>
+		<field name="anotherfield" uuid="751041E8F71B4C548A279039CD51473E" type="6" never_null="true" id="3"/>
+		<primary_key field_name="ID" field_uuid="CA05E08CB06448DF918BBED84205C7F0"/>
+		<primary_key field_name="testing_only" field_uuid="476E826FD8B04484924AF19407DAF15B"/>
+		<table_extra>
+			<editor_table_info displayable_fields_count="6">
+				<color red="255" green="255" blue="255" alpha="0"/>
+				<coordinates left="49.10546875" top="142.18359375" width="120" height="167.33203125"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<index kind="regular" unique_keys="true" uuid="270414D68E654AF592CA884313B6EF34" type="1">
+		<field_ref uuid="CA05E08CB06448DF918BBED84205C7F0" name="ID">
+			<table_ref uuid="D14BD883DCEC4138A0C448E00F8E4EBB" name="Table_1"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="32E577EEDC754147B9E4FCCBDF0C53E5" type="1">
+		<field_ref uuid="CA05E08CB06448DF918BBED84205C7F0" name="ID">
+			<table_ref uuid="D14BD883DCEC4138A0C448E00F8E4EBB" name="Table_1"/>
+		</field_ref>
+		<field_ref uuid="476E826FD8B04484924AF19407DAF15B" name="testing_only">
+			<table_ref uuid="D14BD883DCEC4138A0C448E00F8E4EBB" name="Table_1"/>
+		</field_ref>
+	</index>
+	<base_extra __stringCompHash="icu:68.1.0" __keywordBuildingHash="icu:68.1.0">
 		<journal_file journal_file_enabled="true"/>
 	</base_extra>
 </base>
