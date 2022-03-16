@@ -402,7 +402,7 @@ Function Soundex($word : Text; $strength : Integer)->$soundex : Text
 	
 	If ($word#"")
 		C_TEXT:C284($SoundsI; $Sounds)
-		C_LONGINT:C283($Zähler; $Nummer; $i; $Genau)
+		C_LONGINT:C283($counter; $Nummer; $i; $Genau)
 		
 		$Sounds:="aehiouwybfpvcgjkqsxzdtlmnr"  //Group characters that sound alike
 		$SoundsI:="11111111222233333333445667"  //Assign numbers for each group
@@ -414,15 +414,15 @@ Function Soundex($word : Text; $strength : Integer)->$soundex : Text
 		End if 
 		
 		$soundex:=$word[[1]]+("0"*$Genau)  //Set a phonetic equivalent default
-		$Zähler:=2
+		$counter:=2
 		$Nummer:=0
 		For ($i; 2; Length:C16($word)-1)
 			$Nummer:=Position:C15($word[[$i]]; $Sounds)
 			If ($Nummer>0)
-				If (($Zähler=2) | (($Zähler>2) & (Character code:C91($SoundsI[[$Nummer]])#Character code:C91($soundex[[$Zähler-1]]))))
-					$soundex[[$Zähler]]:=$SoundsI[[$Nummer]]-1
-					$Zähler:=$Zähler+1
-					If ($Zähler>($Genau+1))
+				If (($counter=2) | (($counter>2) & (Character code:C91($SoundsI[[$Nummer]])#Character code:C91($soundex[[$counter-1]]))))
+					$soundex[[$counter]]:=$SoundsI[[$Nummer]]
+					$counter:=$counter+1
+					If ($counter>($Genau+1))
 						$i:=Length:C16($word)
 					End if 
 				End if 
