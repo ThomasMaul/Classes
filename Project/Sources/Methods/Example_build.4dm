@@ -27,9 +27,9 @@ you might need to start Xcode once manually after every macOS update to accept X
 you might need to start Xcode to accept Apple contract changes or update expired certificates (visit developer.apple.com)
 */
 
-var $builder : cs:C1710._Build
+var $builder : cs:C1710._build
 
-$builder:=cs:C1710._Build.new()
+$builder:=cs:C1710._build.new()
 
 var $progress : Integer
 var $error; $sourcefolder : Object

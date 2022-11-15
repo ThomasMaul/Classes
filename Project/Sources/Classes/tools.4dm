@@ -3,30 +3,35 @@ Class constructor
 	// generic
 Function HexToDec($hex : Text)->$dec : Integer
 	// hex as "A2b3"
-	
-	C_TEXT:C284($thisPosition)
-	C_LONGINT:C283($thisMultiplier; $length; $a)
-	$dec:=0
-	$length:=Length:C16($hex)
-	For ($a; 1; $length)
-		$thisPosition:=Substring:C12($hex; $a; 1)
-		Case of 
-			: ($thisPosition="A")
-				$thisPosition:="10"
-			: ($thisPosition="B")
-				$thisPosition:="11"
-			: ($thisPosition="C")
-				$thisPosition:="12"
-			: ($thisPosition="D")
-				$thisPosition:="13"
-			: ($thisPosition="E")
-				$thisPosition:="14"
-			: ($thisPosition="F")
-				$thisPosition:="15"
-		End case 
-		$thisMultiplier:=16^($length-$a)
-		$dec:=$dec+(Num:C11($thisPosition)*($thisMultiplier))
-	End for 
+	If ($hex#"0x@")
+		$hex:="0x"+$hex
+	End if 
+	$dec:=Formula from string:C1601($hex).call()
+/* old code, doing it manually....
+C_TEXT($thisPosition)
+C_LONGINT($thisMultiplier; $length; $a)
+$dec:=0
+$length:=Length($hex)
+For ($a; 1; $length)
+$thisPosition:=Substring($hex; $a; 1)
+Case of 
+: ($thisPosition="A")
+$thisPosition:="10"
+: ($thisPosition="B")
+$thisPosition:="11"
+: ($thisPosition="C")
+$thisPosition:="12"
+: ($thisPosition="D")
+$thisPosition:="13"
+: ($thisPosition="E")
+$thisPosition:="14"
+: ($thisPosition="F")
+$thisPosition:="15"
+End case 
+$thisMultiplier:=16^($length-$a)
+$dec:=$dec+(Num($thisPosition)*($thisMultiplier))
+End for 
+*/
 	
 Function CalendarWeek($date : Date)->$week : Integer
 /*
