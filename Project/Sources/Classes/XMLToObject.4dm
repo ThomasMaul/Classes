@@ -20,7 +20,6 @@ Function get($always_col : Collection)->$obj : Object
 	End if 
 	
 	var $content; $ref; $subref; $next_XML_Ref; $ElemValue : Text
-	var $obj : Object
 	
 	$content:=This:C1470.content
 	$ref:=DOM Parse XML variable:C720($content)
@@ -33,22 +32,11 @@ Function get($always_col : Collection)->$obj : Object
 		DOM GET XML ELEMENT NAME:C730($ref; $name)
 		This:C1470._child($obj; $name; $ref; $ref)
 		
-		$subref:=DOM Get first child XML element:C723($ref; $Name; $ElemValue)
-		This:C1470._child($obj; $name; $subref; $ElemValue)
-		
-		While (OK=1)
-			$next_XML_Ref:=DOM Get next sibling XML element:C724($subref; $Name; $ElemValue)
-			$subref:=$next_XML_Ref
-			If (OK=1)
-				This:C1470._child($obj; $name; $next_XML_Ref; $ElemValue)
-			End if 
-		End while 
-		
 		DOM CLOSE XML:C722($ref)
 	End if 
 	
 Function _child($obj : Object; $name : Text; $ref : Text; $value : Text)
-	C_OBJECT:C1216($oldobject; $obj; $dummy)
+	C_OBJECT:C1216($oldobject; $dummy)
 	var $numAttributes; $i; $oldok; $type : Integer
 	var $ElemValue; $subref; $testvalue; $child; $next_XML_Ref : Text
 	
