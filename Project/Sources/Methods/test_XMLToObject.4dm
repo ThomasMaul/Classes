@@ -10,6 +10,7 @@ For ($i; 1; 1)
 	Case of 
 		: ($i=1)
 			$cvs_text:="<gen9><RootElement>\n      <Elem1>\n         <Elem2>\n            <Elem3 Font=\"Verdana\" Size=\"10\"> </Elem3>\n         </Elem2>\n      </Elem1>\n   </RootElement></gen9>"
+			
 			$csv:=cs:C1710.XMLToObject.new($cvs_text)
 			$obj:=$csv.get()
 			

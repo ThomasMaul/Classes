@@ -28,7 +28,7 @@
 			<table_ref uuid="D14BD883DCEC4138A0C448E00F8E4EBB" name="Table_1"/>
 		</field_ref>
 	</index>
-	<base_extra __stringCompHash="icu:68.1.0" __keywordBuildingHash="icu:68.1.0">
+	<base_extra>
 		<journal_file journal_file_enabled="true"/>
 	</base_extra>
 </base>
