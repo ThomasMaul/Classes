@@ -1,4 +1,4 @@
-Class constructor
+singleton Class constructor
 	
 	// generic
 Function HexToDec($hex : Text)->$dec : Integer
@@ -7,31 +7,6 @@ Function HexToDec($hex : Text)->$dec : Integer
 		$hex:="0x"+$hex
 	End if 
 	$dec:=Formula from string:C1601($hex).call()
-/* old code, doing it manually....
-C_TEXT($thisPosition)
-C_LONGINT($thisMultiplier; $length; $a)
-$dec:=0
-$length:=Length($hex)
-For ($a; 1; $length)
-$thisPosition:=Substring($hex; $a; 1)
-Case of 
-: ($thisPosition="A")
-$thisPosition:="10"
-: ($thisPosition="B")
-$thisPosition:="11"
-: ($thisPosition="C")
-$thisPosition:="12"
-: ($thisPosition="D")
-$thisPosition:="13"
-: ($thisPosition="E")
-$thisPosition:="14"
-: ($thisPosition="F")
-$thisPosition:="15"
-End case 
-$thisMultiplier:=16^($length-$a)
-$dec:=$dec+(Num($thisPosition)*($thisMultiplier))
-End for 
-*/
 	
 Function CalendarWeek($date : Date)->$week : Integer
 /*
@@ -79,6 +54,21 @@ Function ResizeArray($array : Pointer; $newsize : Integer)
 			$pos:=$alt-$newsize
 			DELETE FROM ARRAY:C228($array->; $alt-$pos+1; $pos)
 	End case 
+	
+Function flattenCollection($col : Collection; $fullName : Boolean)
+	var $curName:=""
+	var $ent : Object
+	For each ($ent; $col)
+		var $ob : Text
+		For each ($ob; $ent)
+			If (Value type:C1509($ent[$ob])=Is object:K8:27)
+				This:C1470._flattenCollObject($ent; $ent[$ob]; $ob; $fullName)
+				OB REMOVE:C1226($ent; $ob)
+			Else 
+				// all is fine already
+			End if 
+		End for each 
+	End for each 
 	
 	
 	// GUI
@@ -281,7 +271,7 @@ Function FindNextNewLine($text : Text; $start : Integer)->$resultpos : Integer
 	End if 
 	
 Function KoelnerPhonetik($word : Text)->$soundex : Text
-	var $result; $word; $zwischen; $char; $last : Text
+	var $result; $zwischen; $char; $last : Text
 	var $charvalue; $loopstart; $x; $i : Integer
 	
 	$result:=""
@@ -491,6 +481,24 @@ Function AccessWebHeader->$variables : Object
 		$variables[$anames{$i}]:=$avalues{$i}
 	End for 
 	
+Function FindArrayValue($search : Text; $lookup : Pointer; $lookin : Pointer)->$result : Text
+	// find Element in Array1 and return Element from Array2
+	// usefull for Get Web Variables or Get Web Header
+	// $result := Helper_FindArrayValue(findvalue;->array1;->array2)
+	// returns "" if findvalue not found
+	
+	C_LONGINT:C283($vlItem)
+	ASSERT:C1129($search#""; "$search needs to be a string to search, it must not be empty")
+	ASSERT:C1129(Type:C295($lookup->)=Text array:K8:16; "$2 needs to be a pointer to a text array")
+	ASSERT:C1129(Type:C295($lookin->)=Text array:K8:16; "$lookin needs to be a pointer to a text array")
+	ASSERT:C1129(Size of array:C274($lookup->)=Size of array:C274($lookin->); "$lookup and $lookin both needs to have the same number of elements")
+	
+	$result:=""
+	$vlItem:=Find in array:C230($lookup->; $search)
+	If ($vlItem>0)
+		$result:=$lookin->{$vlItem}
+	End if 
+	
 Function URLEncoder($url : Text; $encoding : Text)->$result : Text
 	//  useful if you need to encode your URL
 	// example:  "www.test.com/my method"  contains a blank, so needs to be converted to "www.test.com/my%20method"
@@ -538,6 +546,23 @@ Function URLEncoder($url : Text; $encoding : Text)->$result : Text
 			End for 
 		End if 
 	End for 
+	
+Function loadImageFromURL($url)->$image : Picture
+	var $request : 4D:C1709.HTTPRequest
+	$request:=4D:C1709.HTTPRequest.new($url; {timeout: 3})
+	$request.wait()
+	If ($request.response.status=200)
+		var $blob : Blob:=$request.response.body
+		BLOB TO PICTURE:C682($blob; $image)
+	End if 
+	
+Function getWebServerAddress->$url : Text
+	var $webobject:=WEB Get server info:C1531
+	$url:=""
+	var $ip_Address_collection : Collection:=$webobject.options.webIPAddressToListen
+	If ($ip_Address_collection.length>0)
+		$url:=$ip_Address_collection[0]+":"+String:C10($webobject.options.webPortID)
+	End if 
 	
 	
 	// ODRA helper
@@ -593,7 +618,14 @@ Function ORDA_GetFieldTypeFromPath($path : Text)->$fieldtyp : Integer
 		$fieldtyp:=This:C1470.ORDA_GetFieldTypeFromPath($newpath)
 	End if 
 	
-	
+Function ORDA_TableNameToTableNum($name)->$number : Integer
+	// helper, converts class name to table number
+	var $class : 4D:C1709.DataClass:=ds:C1482[$name]
+	If ($class#Null:C1517)
+		return $class.getInfo().tableNumber
+	Else 
+		return -1
+	End if 
 	
 	
 	// ******  INTERNAL ONLY  ********
@@ -638,4 +670,19 @@ Function _ORDA_FindRelationPath($FromClassName : Text; $ToClassName : Text; $Max
 		End if 
 	End if 
 	
-	
+Function _flattenCollObject($ent : Object; $subent : Object; $curName : Text; $fullName : Boolean)
+	var $ob : Text
+	For each ($ob; $subent)
+		If (Value type:C1509($subent[$ob])=Is object:K8:27)
+			var $name : Text:=($curName="") ? $ob : $curName+"."+$ob
+			This:C1470._flattenCollObject($ent; $subent[$ob]; $name; $fullName)
+			OB REMOVE:C1226($subent; $ob)
+		Else 
+			If ($fullName)
+				$name:=($curName="") ? $ob : $curName+"."+$ob
+				$ent[$name]:=$subent[$ob]
+			Else 
+				$ent[$ob]:=$subent[$ob]
+			End if 
+		End if 
+	End for each 

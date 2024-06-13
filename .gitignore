@@ -1,7 +1,25 @@
-*.4dd
-*.4DIndx
-*.Match
+# Data folder
+[dD][aA][tT][aA]/
+
+# Derived data
+DerivedData/
+
+# Libraries
+Libraries/
+
+# User preferences
+userPreferences.*/
+
+# Uncomment (remove the following # ) to ignore Trash
+# Project/Trash
+
+Settings/buildApp.4DSettings
+
+# System files
+.DS_Store
+ehthumbs.db
+Thumbs.db
+
+
 Logs
-Project/DerivedData
 *symbols.txt
-userPreferences.*

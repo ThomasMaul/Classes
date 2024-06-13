@@ -1,12 +1,5 @@
-Class constructor($StructureXML : Text)
-	var $obj : cs:C1710.XMLToObject
-	
-	If ($StructureXML#"")
-		$obj:=cs:C1710.XMLToObject.new($StructureXML)
-		This:C1470.structure:=$obj.get(New collection:C1472("table"; "field"; "relation"; "index"; "primary_key"))
-	Else 
-		This:C1470.structure:=New object:C1471
-	End if 
+singleton Class constructor
+	This:C1470.refresh()
 	
 Function get()->$result : Object
 	$result:=This:C1470.structure
@@ -29,6 +22,11 @@ Function getIndexInfo($info : Object)->$result : Object
 Function getIndexInfos($info : Object)->$result : Object
 	$result:=This:C1470._Structure_Read("indexes"; $info)
 	
+Function refresh()
+	var $StructureXML : Text:=File:C1566("/PROJECT/Sources/catalog.4DCatalog").getText()
+	If ($StructureXML#"")
+		This:C1470.structure:=This:C1470._XMLToObject_get($StructureXML; New collection:C1472("table"; "field"; "relation"; "index"; "primary_key")).base
+	End if 
 	
 	
 Function _Structure_Read($what : Text; $info : Object)->$result : Object
@@ -37,7 +35,7 @@ Function _Structure_Read($what : Text; $info : Object)->$result : Object
 	// 2nd/3rd parameter is object name (table name, field name)
 	
 	C_COLLECTION:C1488($tables; $fields; $indexes; $relations; $in; $out)
-	C_OBJECT:C1216($result; $table; $field; $index; $relation)
+	C_OBJECT:C1216($table; $field; $index; $relation)
 	C_POINTER:C301($ptr)
 	C_TEXT:C284($name; $Fieldname)
 	
@@ -290,5 +288,72 @@ Function _Structure_Read($what : Text; $info : Object)->$result : Object
 			
 	End case 
 	
+Function _XMLToObject_get($structureXML : Text; $always_col : Collection)->$obj : Object
+	This:C1470.always_col:=$always_col
 	
+	var $content; $ref; $subref; $next_XML_Ref; $ElemValue : Text
+	$ref:=DOM Parse XML variable:C720($structureXML)
+	C_TEXT:C284($name)
+	
+	If (OK=1)
+		$obj:=New object:C1471
+		
+		// root
+		DOM GET XML ELEMENT NAME:C730($ref; $name)
+		This:C1470._XMLToObject_child($obj; $name; $ref; $ref)
+		
+		DOM CLOSE XML:C722($ref)
+	End if 
+	
+Function _XMLToObject_child($obj : Object; $name : Text; $ref : Text; $value : Text)
+	C_OBJECT:C1216($oldobject; $dummy)
+	var $numAttributes; $i; $oldok; $type : Integer
+	var $ElemValue; $subref; $testvalue; $child; $next_XML_Ref : Text
+	
+	$dummy:=New object:C1471
+	$numAttributes:=DOM Count XML attributes:C727($ref)
+	C_TEXT:C284($Attrib; $ValAttrib)
+	For ($i; 1; $numAttributes)
+		DOM GET XML ATTRIBUTE BY INDEX:C729($ref; $i; $Attrib; $ValAttrib)
+		$dummy[$Attrib]:=$ValAttrib
+	End for 
+	$testvalue:=Replace string:C233(Replace string:C233($value; "\n"; ""); "\t"; "")
+	If ($testvalue#"")
+		$dummy.__value:=$value
+	End if 
+	
+	$oldok:=ok
+	// check for childs
+	$subref:=DOM Get first child XML element:C723($ref; $child; $ElemValue)
+	If (OK=1)
+		This:C1470._XMLToObject_child($dummy; $child; $subref; $ElemValue)
+		
+		While (OK=1)
+			$next_XML_Ref:=DOM Get next sibling XML element:C724($subref; $child; $ElemValue)
+			$subref:=$next_XML_Ref
+			If (OK=1)
+				This:C1470._XMLToObject_child($dummy; $child; $next_XML_Ref; $ElemValue)
+			End if 
+		End while 
+	End if 
+	ok:=$oldok
+	
+	// add object to existing main object
+	If ($obj[$name]#Null:C1517)  // object already exists, we need a collection
+		$type:=Value type:C1509($obj[$name])
+		If ($type=Is object:K8:27)
+			$oldobject:=$obj[$name]
+			$obj[$name]:=New collection:C1472($obj[$name]; $dummy)
+		Else 
+			$obj[$name].push($dummy)
+		End if 
+	Else 
+		// add it as standard object - except if name is in exception list
+		If (This:C1470.always_col.indexOf($name)<0)
+			$obj[$name]:=$dummy
+		Else 
+			// handle it as collection
+			$obj[$name]:=New collection:C1472($dummy)
+		End if 
+	End if 
 	

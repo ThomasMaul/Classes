@@ -1,0 +1,790 @@
+{
+	"_method_": {},
+	"cs.classesTM": {
+		"DTStamp": {
+			"new()": {
+				"Syntax": "**.new**( *date* : Date; *time* : Time; *startdate* : Date )",
+				"Params": [
+					[
+						"date",
+						"Date",
+						"->"
+					],
+					[
+						"time",
+						"Time",
+						"->"
+					],
+					[
+						"startdate",
+						"Date",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"tools": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"XMLToObject": {
+			"new()": {
+				"Syntax": "**.new**( *init* : Variant; *always_col* : Collection )",
+				"Params": [
+					[
+						"init",
+						"Variant",
+						"->"
+					],
+					[
+						"always_col",
+						"Collection",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"csv": {
+			"new()": {
+				"Syntax": "**.new**( *init* : Variant )",
+				"Params": [
+					[
+						"init",
+						"Variant",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"StructureInfo": {
+			"new()": {
+				"Syntax": "**.new**( *StructureXML* : Text )",
+				"Params": [
+					[
+						"StructureXML",
+						"Text",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		}
+	},
+	"DTStamp": {
+		"GetObject()": {
+			"Syntax": "**.GetObject**( *startdate* : Date )->date : Object",
+			"Params": [
+				[
+					"startdate",
+					"Date",
+					"->"
+				],
+				[
+					"date",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"GetString()": {
+			"Syntax": "**.GetString**( *startdate* : Date )->date : Text",
+			"Params": [
+				[
+					"startdate",
+					"Date",
+					"->"
+				],
+				[
+					"date",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"GetValues()": {
+			"Syntax": "**.GetValues**( *date* : Pointer; *time* : Pointer; *startdate* : Date )",
+			"Params": [
+				[
+					"date",
+					"Pointer",
+					"->"
+				],
+				[
+					"time",
+					"Pointer",
+					"->"
+				],
+				[
+					"startdate",
+					"Date",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"GetDate()": {
+			"Syntax": "**.GetDate**( *startdate* : Date )->date : Date",
+			"Params": [
+				[
+					"startdate",
+					"Date",
+					"->"
+				],
+				[
+					"date",
+					"Date",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"tools": {
+		"getWebServerAddress()": {
+			"Syntax": "**.getWebServerAddress**()->url : Text",
+			"Params": [
+				[
+					"url",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"ORDA_GetRelationSelection()": {
+			"Syntax": "**.ORDA_GetRelationSelection**( *fromSelection* : Object; *TargetClassName* : Text; *MaxDepth* : Integer )->relatedSelection : Object",
+			"Params": [
+				[
+					"fromSelection",
+					"Object",
+					"->"
+				],
+				[
+					"TargetClassName",
+					"Text",
+					"->"
+				],
+				[
+					"MaxDepth",
+					"Integer",
+					"->"
+				],
+				[
+					"relatedSelection",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"loadImageFromURL()": {
+			"Syntax": "**.loadImageFromURL**( *url* : Variant )->image : Picture",
+			"Params": [
+				[
+					"url",
+					"Variant",
+					"->"
+				],
+				[
+					"image",
+					"Picture",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"AccessWebVariables()": {
+			"Syntax": "**.AccessWebVariables**( *body* : Boolean )->variables : Object",
+			"Params": [
+				[
+					"body",
+					"Boolean",
+					"->"
+				],
+				[
+					"variables",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"FindArrayValue()": {
+			"Syntax": "**.FindArrayValue**( *search* : Text; *lookup* : Pointer; *lookin* : Pointer )->result : Text",
+			"Params": [
+				[
+					"search",
+					"Text",
+					"->"
+				],
+				[
+					"lookup",
+					"Pointer",
+					"->"
+				],
+				[
+					"lookin",
+					"Pointer",
+					"->"
+				],
+				[
+					"result",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"KoelnerPhonetik()": {
+			"Syntax": "**.KoelnerPhonetik**( *word* : Text )->soundex : Text",
+			"Params": [
+				[
+					"word",
+					"Text",
+					"->"
+				],
+				[
+					"soundex",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"AccessWebHeader()": {
+			"Syntax": "**.AccessWebHeader**()->variables : Object",
+			"Params": [
+				[
+					"variables",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"FindNextNewLine()": {
+			"Syntax": "**.FindNextNewLine**( *text* : Text; *start* : Integer )->resultpos : Integer",
+			"Params": [
+				[
+					"text",
+					"Text",
+					"->"
+				],
+				[
+					"start",
+					"Integer",
+					"->"
+				],
+				[
+					"resultpos",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Filter_RemoveTabReturn()": {
+			"Syntax": "**.Filter_RemoveTabReturn**( *text* : Text )->result : Text",
+			"Params": [
+				[
+					"text",
+					"Text",
+					"->"
+				],
+				[
+					"result",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"ORDA_TableNameToTableNum()": {
+			"Syntax": "**.ORDA_TableNameToTableNum**( *name* : Variant )->number : Integer",
+			"Params": [
+				[
+					"name",
+					"Variant",
+					"->"
+				],
+				[
+					"number",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Filter_RemoveLeadingZero()": {
+			"Syntax": "**.Filter_RemoveLeadingZero**( *text* : Text )->result : Text",
+			"Params": [
+				[
+					"text",
+					"Text",
+					"->"
+				],
+				[
+					"result",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Filter_RemoveLeadingEndingBlanks()": {
+			"Syntax": "**.Filter_RemoveLeadingEndingBlanks**( *text* : Text )->result : Text",
+			"Params": [
+				[
+					"text",
+					"Text",
+					"->"
+				],
+				[
+					"result",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Filter_RemoveWildcard()": {
+			"Syntax": "**.Filter_RemoveWildcard**( *text* : Text )->result : Text",
+			"Params": [
+				[
+					"text",
+					"Text",
+					"->"
+				],
+				[
+					"result",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Filter_OnlyNumeric()": {
+			"Syntax": "**.Filter_OnlyNumeric**( *text* : Text; *special* : Boolean )->result : Text",
+			"Params": [
+				[
+					"text",
+					"Text",
+					"->"
+				],
+				[
+					"special",
+					"Boolean",
+					"->"
+				],
+				[
+					"result",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"CheckEmailAddress()": {
+			"Syntax": "**.CheckEmailAddress**( *emailAddress* : Text )->result : Boolean",
+			"Params": [
+				[
+					"emailAddress",
+					"Text",
+					"->"
+				],
+				[
+					"result",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"AdjustWindowSize()": {
+			"Syntax": "**.AdjustWindowSize**( *formname* : Text; *curFormTable* : Pointer )",
+			"Params": [
+				[
+					"formname",
+					"Text",
+					"->"
+				],
+				[
+					"curFormTable",
+					"Pointer",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"SetWindowSizeFromObject()": {
+			"Syntax": "**.SetWindowSizeFromObject**( *obj* : Object )",
+			"Params": [
+				[
+					"obj",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"URLEncoder()": {
+			"Syntax": "**.URLEncoder**( *url* : Text; *encoding* : Text )->result : Text",
+			"Params": [
+				[
+					"url",
+					"Text",
+					"->"
+				],
+				[
+					"encoding",
+					"Text",
+					"->"
+				],
+				[
+					"result",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"GetWindowSizeInObject()": {
+			"Syntax": "**.GetWindowSizeInObject**()->obj : Object",
+			"Params": [
+				[
+					"obj",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Soundex()": {
+			"Syntax": "**.Soundex**( *word* : Text; *strength* : Integer )->soundex : Text",
+			"Params": [
+				[
+					"word",
+					"Text",
+					"->"
+				],
+				[
+					"strength",
+					"Integer",
+					"->"
+				],
+				[
+					"soundex",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"ORDA_GetFieldTypeFromPath()": {
+			"Syntax": "**.ORDA_GetFieldTypeFromPath**( *path* : Text )->fieldtyp : Integer",
+			"Params": [
+				[
+					"path",
+					"Text",
+					"->"
+				],
+				[
+					"fieldtyp",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"OpenFormWindowStack()": {
+			"Syntax": "**.OpenFormWindowStack**( *formular* : Text; *parawindowtyp* : Integer; *tablePtr* : Pointer )->win : Integer",
+			"Params": [
+				[
+					"formular",
+					"Text",
+					"->"
+				],
+				[
+					"parawindowtyp",
+					"Integer",
+					"->"
+				],
+				[
+					"tablePtr",
+					"Pointer",
+					"->"
+				],
+				[
+					"win",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"ResizeArray()": {
+			"Syntax": "**.ResizeArray**( *array* : Pointer; *newsize* : Integer )",
+			"Params": [
+				[
+					"array",
+					"Pointer",
+					"->"
+				],
+				[
+					"newsize",
+					"Integer",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"HexToDec()": {
+			"Syntax": "**.HexToDec**( *hex* : Text )->dec : Integer",
+			"Params": [
+				[
+					"hex",
+					"Text",
+					"->"
+				],
+				[
+					"dec",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"CheckIBAN()": {
+			"Syntax": "**.CheckIBAN**( *IBAN* : Text )->correct : Boolean",
+			"Params": [
+				[
+					"IBAN",
+					"Text",
+					"->"
+				],
+				[
+					"correct",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"flattenCollection()": {
+			"Syntax": "**.flattenCollection**( *col* : Collection; *fullName* : Boolean )",
+			"Params": [
+				[
+					"col",
+					"Collection",
+					"->"
+				],
+				[
+					"fullName",
+					"Boolean",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"CalendarWeek()": {
+			"Syntax": "**.CalendarWeek**( *date* : Date )->week : Integer",
+			"Params": [
+				[
+					"date",
+					"Date",
+					"->"
+				],
+				[
+					"week",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"XMLToObject": {
+		"get()": {
+			"Syntax": "**.get**( *always_col* : Collection )->obj : Object",
+			"Params": [
+				[
+					"always_col",
+					"Collection",
+					"->"
+				],
+				[
+					"obj",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"csv": {
+		"set()": {
+			"Syntax": "**.set**( *content* : Collection; *columndelpara* : Text; *linedelpara* : Text )->result : Text",
+			"Params": [
+				[
+					"content",
+					"Collection",
+					"->"
+				],
+				[
+					"columndelpara",
+					"Text",
+					"->"
+				],
+				[
+					"linedelpara",
+					"Text",
+					"->"
+				],
+				[
+					"result",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get()": {
+			"Syntax": "**.get**( *columndelpara* : Text; *linedelpara* : Text )->col : Collection",
+			"Params": [
+				[
+					"columndelpara",
+					"Text",
+					"->"
+				],
+				[
+					"linedelpara",
+					"Text",
+					"->"
+				],
+				[
+					"col",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"StructureInfo": {
+		"getIndexInfos()": {
+			"Syntax": "**.getIndexInfos**( *info* : Object )->result : Object",
+			"Params": [
+				[
+					"info",
+					"Object",
+					"->"
+				],
+				[
+					"result",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getIndexInfo()": {
+			"Syntax": "**.getIndexInfo**( *info* : Object )->result : Object",
+			"Params": [
+				[
+					"info",
+					"Object",
+					"->"
+				],
+				[
+					"result",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getRelationInfos()": {
+			"Syntax": "**.getRelationInfos**( *info* : Object )->result : Object",
+			"Params": [
+				[
+					"info",
+					"Object",
+					"->"
+				],
+				[
+					"result",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getRelationInfo()": {
+			"Syntax": "**.getRelationInfo**( *info* : Object )->result : Object",
+			"Params": [
+				[
+					"info",
+					"Object",
+					"->"
+				],
+				[
+					"result",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getFieldInfo()": {
+			"Syntax": "**.getFieldInfo**( *info* : Object )->result : Object",
+			"Params": [
+				[
+					"info",
+					"Object",
+					"->"
+				],
+				[
+					"result",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getTableInfo()": {
+			"Syntax": "**.getTableInfo**( *info* : Object )->result : Object",
+			"Params": [
+				[
+					"info",
+					"Object",
+					"->"
+				],
+				[
+					"result",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get()": {
+			"Syntax": "**.get**()->result : Object",
+			"Params": [
+				[
+					"result",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	}
+}
