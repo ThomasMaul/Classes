@@ -23,7 +23,7 @@ Function getIndexInfos($info : Object)->$result : Object
 	$result:=This:C1470._Structure_Read("indexes"; $info)
 	
 Function refresh()
-	var $StructureXML : Text:=File:C1566("/PROJECT/Sources/catalog.4DCatalog").getText()
+	var $StructureXML : Text:=File:C1566("/PROJECT/Sources/catalog.4DCatalog"; *).getText()
 	If ($StructureXML#"")
 		This:C1470.structure:=This:C1470._XMLToObject_get($StructureXML; New collection:C1472("table"; "field"; "relation"; "index"; "primary_key")).base
 	End if 
