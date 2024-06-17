@@ -1,4 +1,4 @@
-singleton Class constructor
+shared singleton Class constructor
 	This:C1470.refresh()
 	
 Function get()->$result : Object
