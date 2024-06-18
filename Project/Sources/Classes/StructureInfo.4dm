@@ -1,4 +1,5 @@
 shared singleton Class constructor
+	This:C1470.always_col:=New shared collection:C1527("table"; "field"; "relation"; "index"; "primary_key")
 	This:C1470.refresh()
 	
 Function get()->$result : Object
@@ -25,7 +26,10 @@ Function getIndexInfos($info : Object)->$result : Object
 Function refresh()
 	var $StructureXML : Text:=File:C1566("/PROJECT/Sources/catalog.4DCatalog"; *).getText()
 	If ($StructureXML#"")
-		This:C1470.structure:=This:C1470._XMLToObject_get($StructureXML; New collection:C1472("table"; "field"; "relation"; "index"; "primary_key")).base
+		$structure:=This:C1470._XMLToObject_get($StructureXML).base
+		Use (This:C1470)  // only if refresh is called again, such as for a structure modification
+			This:C1470.structure:=OB Copy:C1225($structure; ck shared:K85:29; This:C1470)
+		End use 
 	End if 
 	
 	
@@ -104,7 +108,7 @@ Function _Structure_Read($what : Text; $info : Object)->$result : Object
 			End if 
 			
 		: ($what="relation")
-			If (This:C1470.structure.table#Null:C1517)
+			If (This:C1470.structure.relation#Null:C1517)
 				Case of 
 					: ($info.uuid#Null:C1517)
 						$relations:=This:C1470.structure.relation.query("uuid=:1"; $info.uuid)
@@ -128,7 +132,7 @@ Function _Structure_Read($what : Text; $info : Object)->$result : Object
 		: ($what="relations")
 			// return collection in object, as it could be no, one or several index using this field
 			// needs table name and field name
-			If (This:C1470.structure.table#Null:C1517)
+			If (This:C1470.structure.relation#Null:C1517)
 				Case of 
 					: (($info.fromTable_name#Null:C1517) & ($info.toTable_name#Null:C1517))
 						For each ($relation; This:C1470.structure.relation)
@@ -211,7 +215,7 @@ Function _Structure_Read($what : Text; $info : Object)->$result : Object
 		: ($what="index")
 			// return collection in object, as it could be no, one or several index using this field
 			// needs table name and field name
-			If (This:C1470.structure.table#Null:C1517)
+			If (This:C1470.structure.index#Null:C1517)
 				Case of 
 					: ($info.name#Null:C1517)
 						$indexes:=This:C1470.structure.index.query("name=:1"; $info.name)
@@ -227,7 +231,7 @@ Function _Structure_Read($what : Text; $info : Object)->$result : Object
 		: ($what="indexes")
 			// return collection in object, as it could be no, one or several index using this.structure field
 			// needs table name and field name
-			If (This:C1470.structure.table#Null:C1517)
+			If (This:C1470.structure.index#Null:C1517)
 				Case of 
 					: (($info.table_name#Null:C1517) & ($info.field_name#Null:C1517))
 						For each ($index; This:C1470.structure.index)
@@ -288,9 +292,7 @@ Function _Structure_Read($what : Text; $info : Object)->$result : Object
 			
 	End case 
 	
-Function _XMLToObject_get($structureXML : Text; $always_col : Collection)->$obj : Object
-	This:C1470.always_col:=$always_col
-	
+Function _XMLToObject_get($structureXML : Text)->$obj : Object
 	var $content; $ref; $subref; $next_XML_Ref; $ElemValue : Text
 	$ref:=DOM Parse XML variable:C720($structureXML)
 	C_TEXT:C284($name)
